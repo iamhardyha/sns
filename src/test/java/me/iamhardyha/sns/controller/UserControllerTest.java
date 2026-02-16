@@ -2,6 +2,7 @@ package me.iamhardyha.sns.controller;
 
 import me.iamhardyha.sns.controller.request.UserJoinRequest;
 import me.iamhardyha.sns.controller.request.UserLoginRequest;
+import me.iamhardyha.sns.exception.ErrorCode;
 import me.iamhardyha.sns.exception.SnsApplicationException;
 import me.iamhardyha.sns.model.User;
 import me.iamhardyha.sns.service.UserService;
@@ -54,7 +55,7 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO: Mocking
-        when(userService.join(userName, password)).thenThrow(new SnsApplicationException(""));
+        when(userService.join(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME, ""));
 
         mockMvc.perform(post("/api/v1/users/join")
                 .contentType(MediaType.APPLICATION_JSON)
