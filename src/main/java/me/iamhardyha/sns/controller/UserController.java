@@ -2,8 +2,10 @@ package me.iamhardyha.sns.controller;
 
 import lombok.RequiredArgsConstructor;
 import me.iamhardyha.sns.controller.request.UserJoinRequest;
+import me.iamhardyha.sns.controller.request.UserLoginRequest;
 import me.iamhardyha.sns.controller.response.Response;
 import me.iamhardyha.sns.controller.response.UserJoinResponse;
+import me.iamhardyha.sns.controller.response.UserLoginResponse;
 import me.iamhardyha.sns.model.User;
 import me.iamhardyha.sns.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +26,9 @@ public class UserController {
         return Response.success(UserJoinResponse.fromUser(user));
     }
 
-    // TODO: implement
     @PostMapping("/login")
-    public void login() {
-        userService.login("userName", "password");
+    public Response<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
+        String token = userService.login(request.getUserName(), request.getPassword());
+        return Response.success(new UserLoginResponse(token));
     }
 }
