@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.iamhardyha.sns.controller.request.PostCreateRequest;
 import me.iamhardyha.sns.controller.response.Response;
 import me.iamhardyha.sns.service.PostService;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,8 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public Response<Void> create(@RequestBody PostCreateRequest request) {
-
-
-        return Response.success(null);
+    public Response<Void> create(@RequestBody PostCreateRequest request, Authentication authentication) {
+        postService.create(request.getTitle(), request.getBody(), authentication.getName());
+        return Response.success();
     }
 }

@@ -2,6 +2,7 @@ package me.iamhardyha.sns.controller;
 
 import me.iamhardyha.sns.controller.request.PostCreateRequest;
 import me.iamhardyha.sns.controller.request.UserJoinRequest;
+import me.iamhardyha.sns.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +10,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
@@ -25,6 +27,9 @@ public class PostControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockitoBean
+    private PostService postService;
 
     @Test
     @WithMockUser
